@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+
+table {
+    margin: auto;
+}
+
+td, th {
+    padding: 10px 20px;
+}
+
+button {
+    padding: 8px 21px;
+    border: none;
+    background-color: aqua;
+    border-radius: 3px;
+    color: #fff;
+}
+
+
+button.add-book {
+    position: relative;
+    margin-top: 40px;
+    left: 0;
+}
+
+button.read {
+    background-color: aqua;
+}
+
+button.not-read {
+    background-color: orange;
+}
+
+#modal {
+    display: none;
+    width: 60%;
+    margin: 0 auto;
+}
+
+form {
+    box-sizing: border-box;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: hsl(0, 0%, 100%);
+    border: 4px solid hsl(0, 0%, 90%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+button[type="reset"], button[class="delete"] {
+    background-color: red;
+}
