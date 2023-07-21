@@ -71,7 +71,7 @@ function createDeleteButton(book) {
     deleteBtn.innerText = "Delete";
 
     deleteBtn.addEventListener('click', e => {
-        myLibrary = myLibrary.filter((book, index, array) => {
+        myLibrary.filter((book, index, array) => {
             if (book.title === deleteBtn.id) {
                 array.splice(index, 1);
                 return false;
