@@ -1,5 +1,6 @@
 let myLibrary = []
 
+// Book constructor
 function Book(title, author, pages, status) {
     this.title = title;
     this.author = author;
@@ -46,23 +47,45 @@ addBook.addEventListener('click', (e) => {
 
 const table = document.querySelector("table");
 
-function updateTable(book) {
-    const tableRow = document.createElement('tr');
+myLibrary.forEach(book => {
+    updateTable(book)
+});
 
-    // add author to table
-    const authorData = document.createElement('td');
-    authorData.innerText = book.author;
+function resetTable() {
+    table.innerHTML = `<tr>
+                              <th>Author</th>
+                              <th>Title</th>
+                              <th>Pages</th>
+                              <th>Status</th>
+                           </tr>`;
+    myLibrary.forEach(book => {
+        updateTable(book);
+    });
+}
 
-    // add title to table
-    const titleData = document.createElement('td');
-    titleData.innerText = book.title;
+function createDeleteButton(book) {
+    const deleteBtn = document.createElement('button');
+    deleteBtn.setAttribute('type', 'button');
+    deleteBtn.setAttribute('id', `${book.title}`);
+    deleteBtn.classList.add('delete');
+    deleteBtn.innerText = "Delete";
 
-    // add pages to table
-    const pagesData = document.createElement('td');
-    pagesData.innerText = book.pages;
+    deleteBtn.addEventListener('click', e => {
+        myLibrary = myLibrary.filter((book, index, array) => {
+            if (book.title === deleteBtn.id) {
+                array.splice(index, 1);
+                return false;
+            }
+            return true;
+        });
 
-    // Render button depending on read status
-    const statusData = document.createElement('td');
+        resetTable()
+    });
+
+    return deleteBtn;
+}
+
+function createReadButton(book) {
     const readBtn = document.createElement('button');
     readBtn.setAttribute('type', 'button');
     if (book.status) {
@@ -81,47 +104,48 @@ function updateTable(book) {
             readBtn.innerText = "Read";
         }
     });
+    return readBtn;
+}
+
+function createTableRow(book) {
+    // Create row element
+    const tableRow = document.createElement('tr');
+
+    // create td element and add author
+    const authorData = document.createElement('td');
+    authorData.innerText = book.author;
+
+    // create td and add title
+    const titleData = document.createElement('td');
+    titleData.innerText = book.title;
+
+    // add pages to td element
+    const pagesData = document.createElement('td');
+    pagesData.innerText = book.pages;
+
+    // Render button depending on read status
+    const statusData = document.createElement('td');
+    const readBtn = createReadButton(book);
     statusData.appendChild(readBtn);
 
     const deleteData = document.createElement('td');
 
-    const deleteBtn = document.createElement('button');
-    deleteBtn.setAttribute('type', 'button');
-    deleteBtn.setAttribute('id', `${book.title}`);
-    deleteBtn.classList.add('delete');
-    deleteBtn.innerText = "Delete"
-    deleteData.appendChild(deleteBtn);
+    const deleteButton = createDeleteButton(book);
+
+    deleteData.appendChild(deleteButton);
 
     tableRow.appendChild(authorData);
     tableRow.appendChild(titleData);
     tableRow.appendChild(pagesData);
     tableRow.appendChild(statusData);
     tableRow.appendChild(deleteData);
-    
-    table.appendChild(tableRow);
 
-    // Add event listener to the delete button
-    const deleteButton = document.getElementById(`${book.title}`);
-    deleteButton.addEventListener('click', e => {
-        myLibrary = myLibrary.filter((book, index, array) => {
-            if (book.title === deleteButton.id) {
-                array.splice(index, 1);
-                return false;
-            }
-            return true;
-        });
-        table.innerHTML = `<tr>
-                              <th>Author</th>
-                              <th>Title</th>
-                              <th>Pages</th>
-                              <th>Status</th>
-                           </tr>`;
-        myLibrary.forEach(book => {
-            updateTable(book);
-        });
-    });
+    return tableRow;
 }
 
-myLibrary.forEach(book => {
-    updateTable(book)
-});
+function updateTable(book) {
+
+    const tableRow = createTableRow(book);
+    
+    table.appendChild(tableRow);
+}
