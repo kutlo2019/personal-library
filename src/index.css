@@ -5,6 +5,10 @@ body {
     text-align: center;
 }
 
+#root {
+  text-align: center;
+}
+
 table {
     margin: auto;
 }

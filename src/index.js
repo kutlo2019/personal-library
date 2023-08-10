@@ -1,6 +1,15 @@
 import './index.css'
-let myLibrary = []
+import Controller from './controller.js'
+import Model from './model';
+import View from './view';
+const myLibrary = []
 
+
+
+const app = new Controller(new Model(), new View());
+app.model.addBook("Born a Crime", "Trevor Noah", 234, false);
+
+console.table('books', app.model.books);
 // Book constructor
 function Book(title, author, pages, status) {
     this.title = title;
@@ -77,6 +86,7 @@ function createDeleteButton(book) {
                 array.splice(index, 1);
                 return false;
             }
+
             return true;
         });
 
@@ -96,6 +106,7 @@ function createReadButton(book) {
         readBtn.classList.add("status", "not-read");
         readBtn.innerText = "Not Read";
     }
+
     readBtn.addEventListener('click', e => {
         if (readBtn.innerText === "Read") {
             readBtn.classList.replace("read", "not-read");
@@ -112,15 +123,15 @@ function createTableRow(book) {
     // Create row element
     const tableRow = document.createElement('tr');
 
-    // create td element and add author
+    // Create td element and add author
     const authorData = document.createElement('td');
     authorData.innerText = book.author;
 
-    // create td and add title
+    // Create td and add title
     const titleData = document.createElement('td');
     titleData.innerText = book.title;
 
-    // add pages to td element
+    // Add pages to td element
     const pagesData = document.createElement('td');
     pagesData.innerText = book.pages;
 
