@@ -2,9 +2,14 @@ export class Controller {
   constructor(model, view) {
     this.model = model;
     this.view = view;
+  }
 
+  startApp() {
     this.onBookListChanged(this.model.books)
+    this.bindHandlers()
+  }
 
+  bindHandlers() {
     this.view.bindAddBook(this.handleAddBook);
     this.view.bindDeleteBook(this.handleDeleteBook);
     this.view.bindToggleRead(this.handleToggleRead);

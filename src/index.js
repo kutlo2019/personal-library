@@ -4,4 +4,5 @@ import { Model } from './model';
 import { View } from './view';
 
 const app = new Controller(new Model(), new View());
-app.model.addBook("Born a Crime", "Trevor Noah", 234, true);
+
+app.startApp();

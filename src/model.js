@@ -5,7 +5,8 @@ export class Model {
     this.books = [
       new Book("The Hobbit", "J.R.R Tolkien", 295, false),
       new Book("Things Fall Apart", "Chinua Achebe", 564, true),
-      new Book("Arrow of God", "Chinua Achebe", 738, false)
+      new Book("Arrow of God", "Chinua Achebe", 738, false),
+      new Book("Born a Crime", "Trevor Noah", 234, true)
     ]
   }
 
